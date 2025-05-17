@@ -1,0 +1,135 @@
+
+ .main-profile-container{
+    max-width: 1150px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ } 
+  .profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    margin-right: 140px;
+  }
+  
+  .profile-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .profile-username {
+    font-size: 1.2rem;
+    color: #777;
+  }
+  
+  .profile-email {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .profile-bio {
+    margin-top: 20px;
+  }
+  
+  .profile-bio h2 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .profile-bio p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  .edit-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #671cf1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .edit-button:hover {
+    background-color: #25035e;
+  }
+
+  .joined-events {
+    max-width: 1150px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .joined-events th, .joined-events td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .joined-events th {
+    background-color: #671cf1;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .joined-events tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .created-events {
+    max-width: 1150px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .created-events th, .created-events td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .created-events th {
+    background-color: #671cf1;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .created-events tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  
+  
