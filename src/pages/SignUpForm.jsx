@@ -93,7 +93,7 @@ navigate('/');
 
   return (
     <div className="auth-container">
-      <h2>Sign Up</h2>
+      <h2>Înregistrare</h2>
       <form onSubmit={handleSubmit} className="auth-form">
         <input
           type="text"

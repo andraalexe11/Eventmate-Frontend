@@ -42,7 +42,7 @@ function LoginForm() {
 
   return (
     <div className="auth-container">
-      <h2>Log in</h2>
+      <h2>Autentificare</h2>
       <form onSubmit={handleSubmit} className="auth-form">
         <input
           type="text"
@@ -53,12 +53,12 @@ function LoginForm() {
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Parolă"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">Intră în cont</button>
       </form>
     </div>
   );

@@ -1,22 +1,22 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
-import "./Header.css"; // Importați fișierul CSS pentru stilizare
+import "./Header.css";
+
 function Header() {
-  const[isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const checkAuth = () => {
-    const token = localStorage.getItem("access_token"); // Vedem dacă există un token
-    const authFlag = localStorage.getItem("isAuthenticated") === "true"; // Flag-ul adăugat
-    setIsAuthenticated(!!token && authFlag); // Dacă există token și e logat, actualizăm starea
+    const token = localStorage.getItem("access_token");
+    const authFlag = localStorage.getItem("isAuthenticated") === "true";
+    setIsAuthenticated(!!token && authFlag);
   };
 
   useEffect(() => {
-    checkAuth(); 
-
+    checkAuth();
     
     const handleStorageChange = () => {
-      checkAuth(); 
+      checkAuth();
     };
     window.addEventListener("storage", handleStorageChange);
 
@@ -24,43 +24,50 @@ function Header() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("access_token"); 
-    localStorage.setItem("isAuthenticated", "false"); 
+    localStorage.removeItem("access_token");
+    localStorage.setItem("isAuthenticated", "false");
     setIsAuthenticated(false);
+    setIsMenuOpen(false);
     console.log("User has logged out.");
   };
 
-const toggleMenu = () => {
-    // Schimbă starea meniului între deschis și închis
+  const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-    return (
-      <header className="header">
-        <h1>EventMate</h1>
-        <nav>
-          <Link to="/">Acasă</Link>
-          <Link to="/createevent">Creează Eveniment</Link>
-          <Link to="/events">Evenimente</Link>
-          <Link to="/profile">Profil</Link>
-          {isAuthenticated ? (    
-          <button className="logout-btn" onClick={handleLogout}>
-            Log Out
-          </button>
+  return (
+    <header className="header">
+      <h1>EventMate</h1>
+      
+      <button className="hamburger-btn" onClick={toggleMenu}>
+        ☰
+      </button>
+      
+      <div className={`side-menu ${isMenuOpen ? "open" : ""}`}>
+        <button className="close-btn" onClick={toggleMenu}>×</button>
+        
+        <nav className="nav-links">
+          <Link to="/" onClick={toggleMenu}>Acasă</Link>
+          <Link to="/createevent" onClick={toggleMenu}>Creează Eveniment</Link>
+          <Link to="/events" onClick={toggleMenu}>Evenimente</Link>
+          <Link to="/profile" onClick={toggleMenu}>Profil</Link>
           
-        ) : (
-          <div className="dropdown">
-            <button className="dropbtn">Opțiuni de Autentificare</button>
-            <div className="dropdown-content">
-              <Link to="/login">Log in</Link>
-              <Link to="/signup">Sign Up</Link>
-            </div>
-          </div>
-        )}
-
-
+          {isAuthenticated ? (
+            <button className="logout-btn" onClick={handleLogout}>
+              Log Out
+            </button>
+          ) : (
+            <>
+              <Link to="/login" onClick={toggleMenu}>Autentificare</Link>
+              <Link to="/signup" onClick={toggleMenu}>Înregistrare</Link>
+            </>
+          )}
         </nav>
-      </header>
-    );
-  }
-export default Header; 
+      </div>
+      
+      {isMenuOpen && <div className="menu-overlay" onClick={toggleMenu}></div>}
+    </header>
+  );
+}
+
+export default Header;

@@ -20,6 +20,25 @@ export const joinEvent = async (title, participant) => {
   );
   return response.data; // Returnăm răspunsul din backend
 };
+export const getEventsForOrganiser = async (organiser) => {
+  try {
+    const token = localStorage.getItem("access_token");
+    const response = await axios.get(`http://localhost:8081/api/events/findbyorganiser`, {
+    
+      params: { 
+        organiser: organiser,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`, // Token JWT pentru protecție
+      },
+    });
+    return response.data || []; // Returnăm datele evenimentului pentru utilizator
+  } catch (error) {
+    console.error("Eroare la preluarea evenimentului pentru organizator:", error);
+    return []; // Returnăm null în caz de eroare
+  }
+}
+
 
 export const getEventsForUser = async (username) => {
   try {
@@ -33,10 +52,10 @@ export const getEventsForUser = async (username) => {
         Authorization: `Bearer ${token}`, // Token JWT pentru protecție
       },
     });
-    return response.data; // Returnăm datele evenimentului pentru utilizator
+    return response.data || []; // Returnăm datele evenimentului pentru utilizator
   } catch (error) {
     console.error("Eroare la preluarea evenimentului pentru utilizator:", error);
-    return null; // Returnăm null în caz de eroare
+    return []; // Returnăm null în caz de eroare
   }
 }
 

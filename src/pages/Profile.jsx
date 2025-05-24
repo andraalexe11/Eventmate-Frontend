@@ -1,12 +1,16 @@
 import React, {useState, useEffect} from "react";
 import './Profile.css';
 import axios from "axios";
+import { getEventsForUser, getEventsForOrganiser } from "../api"; // Asigură-te că ai importat funcția corectă
 function Profile() {
   const [username, setUsername] = useState(""); 
   const [email, setEmail] = useState("");
   const [bio, setBio] = useState("");
   const [editMode, setEditMode] = useState(false); // Stare pentru modul de editare
   const [newBio, setNewBio] = useState("");
+  const [joinedEvents, setJoinedEvents] = useState([]);
+  const [createdEvents, setCreatedEvents] = useState([]);
+
   
 
       const decodeToken = (token) => {
@@ -35,6 +39,25 @@ function Profile() {
           
         }
       }, []);
+       useEffect(() => {
+           const fetchUserEvents = async () => {
+             if (!username) return;
+             try {
+               const jevents =  await getEventsForUser(username); // Preluăm evenimentele pentru utilizator
+               setJoinedEvents(jevents); // Setăm evenimentele la care utilizatorul participă
+                console.log("Evenimentele la care particip:", jevents);
+                const cevents = await getEventsForOrganiser(username); // Preluăm evenimentele create de utilizator
+                setCreatedEvents(cevents); // Setăm evenimentele create de utilizator
+             } catch (error) {
+               console.error("Eroare la preluarea evenimentelor:", error);
+             }
+           };
+       
+           fetchUserEvents();
+         }, [username]);
+
+
+
       const handleEditToggle = () => {
         setEditMode(!editMode);
       };
@@ -77,8 +100,8 @@ function Profile() {
     email: email,
     bio: '',
     profilePicture: 'https://images.unsplash.com/photo-1628260412297-a3377e45006f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGNhcnRvb258ZW58MHx8MHx8fDA%3D',
-    joinedEvents: [],
-    createdevents: []
+    joinedEvents: joinedEvents,
+    createdEvents: createdEvents
   };
 
   return (
@@ -124,20 +147,14 @@ function Profile() {
             </tr>
           </thead>
           <tbody>
-            {user.joinedEvents.map(event => (
+            {joinedEvents.map(event => (
               <tr key={event.id}>
                 <td>{event.name}</td>
                 <td>{event.location}</td>
                 <td>{event.date}</td>
               </tr>
             ))}
-             {user.createdevents.map(event => (
-              <tr key={event.id}>
-                <td>{event.name}</td>
-                <td>{event.location}</td>
-                <td>{event.date}</td>
-              </tr>
-            ))}
+            
           </tbody>
         </table>
       </div>
@@ -152,7 +169,7 @@ function Profile() {
             </tr>
           </thead>
           <tbody>
-            {user.createdevents.map(event => (
+            {createdEvents.map(event => (
               <tr key={event.id}>
                 <td>{event.name}</td>
                 <td>{event.location}</td>
