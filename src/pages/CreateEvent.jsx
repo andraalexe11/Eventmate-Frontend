@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import "../components/Events.css"; // Asigură-te că ai un fișier CSS pentru stilizare
 function CreateEvent() {
     const [eventDetails, setEventDetails] = useState({ title: "", description: "", location: "", date: "", maxParticipants: ""});
     const [errorMessage, setErrorMessage] = useState(null); // Pentru mesajele de eroare

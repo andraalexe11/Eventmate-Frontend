@@ -1,6 +1,7 @@
 .header {
-  background-color: #671cf1;
+  background-color: #1c0941;
   color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
@@ -11,11 +12,25 @@
   top: 0;
   left: 0;
   z-index: 1000;
+  border-bottom-left-radius: 15px; /* Rotunjire colt stânga-jos */
+  border-bottom-right-radius: 15px; /* Rotunjire colt dreapta-jos */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Umbra subtilă */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Linie subtilă la baza header-ului */
+  height: 70px;
+  /* Efect de adâncime */
+  transition: all 0.3s ease;
 }
 
 .header h1 {
   margin: 0;
   font-size: 1.5rem;
+}
+.site-title {
+  text-decoration: none;
+  color: inherit;
+}
+.site-title:hover {
+  color: #ffffff; /* Culoare de hover pentru titlu */
 }
 
 /* Buton hamburger - mereu vizibil */
@@ -36,7 +51,7 @@
   right: -300px;
   width: 280px;
   height: 100vh;
-  background-color: #671cf1;
+  background-color: #1c0941;
   transition: right 0.3s ease;
   z-index: 1001;
   padding-top: 60px;
@@ -94,4 +109,26 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+}
+
+
+
+.fixed-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../images/bkg1.jpeg');
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  
+  min-width: 100%;
+  min-height: 100%;
+  transform: scale(1.05);
+  z-index: -1000;
+  filter: blur(2px);
 }

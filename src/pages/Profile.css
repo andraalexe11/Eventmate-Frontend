@@ -1,135 +1,218 @@
+/* Stiluri generale */
+.profile-container {
+  max-width: 1100px;
+  margin-top: 70px;
+  margin-left: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2d3748;
+}
 
- .main-profile-container{
-    max-width: 1150px;
-    border-collapse: collapse;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- } 
+/* Card principal */
+.main-profile-container {
+  
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+/* Header profil */
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture-container {
+  position: relative;
+  margin-right: 30px;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #671cf1;
+  box-shadow: 0 4px 15px rgba(103, 28, 241, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.profile-picture:hover {
+  border-color: #8a5cf6;
+  transform: scale(1.03);
+}
+
+.profile-picture-upload {
+  display: none;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: #1a202c;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #edf2f7;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #4a5568;
+  min-width: 120px;
+}
+
+.info-value {
+  color: #2d3748;
+}
+
+/* Secțiuni evenimente */
+.events-section {
+  
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.events-section h2 {
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1a202c;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+/* Tabele evenimente */
+.events-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+}
+
+.events-table th {
+  background-color: #671cf1;
+  color: white;
+  font-weight: 600;
+  padding: 15px;
+  text-align: center;
+}
+
+.events-table th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.events-table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.events-table td {
+  background-color: #f7fafc;
+  padding: 15px;
+  border-bottom: 1px solid #edf2f7;
+  vertical-align: middle;
+}
+
+.events-table tr:last-child td {
+  border-bottom: none;
+}
+
+.events-table tr:hover td {
+  background-color: #f8f9fa;
+}
+
+.events-table tr {
+  transition: all 0.2s;
+}
+
+.events-table tr:hover {
+  transform: translateX(5px);
+}
+
+.events-table button{
+  background-color: #671cf1;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0 5px;
+}
+
+/* Mesaj fără evenimente */
+.no-events-message {
+  text-align: center;
+  padding: 30px;
+  color: #718096;
+  font-size: 1.1rem;
+  background-color: #f8f9fab3;
+  border-radius: 8px;
+  width: 80%;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.no-events-message button {
+  margin: 10px auto;
+  background-color: #671cf1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
   .profile-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    flex-direction: column;
+    text-align: center;
   }
   
   .profile-picture {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 20px;
+    margin-right: 0;
+    margin-bottom: 20px;
   }
   
   .profile-info {
-    display: flex;
+    align-items: center;
+  }
+  
+  .info-item {
     flex-direction: column;
-    margin-right: 140px;
-  }
-  
-  .profile-name {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .profile-username {
-    font-size: 1.2rem;
-    color: #777;
-  }
-  
-  .profile-email {
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  .profile-bio {
-    margin-top: 20px;
-  }
-  
-  .profile-bio h2 {
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  .profile-bio p {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.5;
-  }
-  
-  .edit-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #671cf1;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
+    align-items: center;
     text-align: center;
   }
   
-  .edit-button:hover {
-    background-color: #25035e;
-  }
-
-  .joined-events {
-    max-width: 1150px;
-    border-collapse: collapse;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  .info-label {
+    margin-bottom: 5px;
+    min-width: auto;
   }
   
-  .joined-events th, .joined-events td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+  .events-table {
+    display: block;
+    overflow-x: auto;
   }
-  
-  .joined-events th {
-    background-color: #671cf1;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .joined-events tr:hover {
-    background-color: #f1f1f1;
-  }
-
-  .created-events {
-    max-width: 1150px;
-    border-collapse: collapse;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .created-events th, .created-events td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .created-events th {
-    background-color: #671cf1;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .created-events tr:hover {
-    background-color: #f1f1f1;
-  }
-
-  
-  
+}

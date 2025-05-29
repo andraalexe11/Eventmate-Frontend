@@ -20,6 +20,24 @@ export const joinEvent = async (title, participant) => {
   );
   return response.data; // Returnăm răspunsul din backend
 };
+
+export const getEventByName = async (name) => {
+  console.log("Preluare eveniment cu numele:", name); // Log pentru debugging
+  try {
+    const token = localStorage.getItem("access_token");
+    const response = await axios.get(`http://localhost:8081/api/events/findbyname`, {
+      params: { name: name },
+      headers: {
+        Authorization: `Bearer ${token}`, // Token JWT pentru protecție
+      },
+    });
+    return response.data; // Returnăm datele evenimentului
+  } catch (error) {
+    console.error("Eroare la preluarea evenimentului:", error);
+    return null; // Returnăm null în caz de eroare
+  }
+}
+
 export const getEventsForOrganiser = async (organiser) => {
   try {
     const token = localStorage.getItem("access_token");
@@ -92,3 +110,54 @@ export const getEvents = async () => {
     return [];
   }
 };
+
+
+export const updateEvent = async (eventName, updatedEventData) => {
+  const token = localStorage.getItem("access_token");
+  try {
+    const response = await axios.put(`http://localhost:8081/api/events/update`, 
+      updatedEventData,
+      {
+      params: { name: eventName },
+      headers: {
+        Authorization: `Bearer ${token}`, // Token JWT pentru protecție
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Eroare la actualizarea evenimentului:", error);
+    throw error;
+  }
+}
+
+ export const cancelEvent = async (eventName) => {
+  const token = localStorage.getItem("access_token");
+  try {
+    const response = await axios.delete(`http://localhost:8081/api/events/delete`, {
+      params: { name: eventName },
+      headers: {
+        Authorization: `Bearer ${token}`, // Token JWT pentru protecție
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Eroare la anularea evenimentului:", error);
+    throw error;
+  }
+}
+
+export const getUserByName = async (username) => {
+  try {
+    const token = localStorage.getItem("access_token");
+    const response = await axios.get(`http://localhost:8081/api/user/getByName`, {
+      params: { name: username },
+      headers: {
+        Authorization: `Bearer ${token}`, // Token JWT pentru protecție
+      },
+    });
+    return response.data; // Returnăm datele utilizatorului
+  } catch (error) {
+    console.error("Eroare la preluarea utilizatorului:", error);
+    return null; // Returnăm null în caz de eroare
+  }
+}

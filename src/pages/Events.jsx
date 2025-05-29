@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getEvents } from "../api";
 import EventCard from "../components/EventCard"; // Asigură-te că ai importat corect EventCard
+import "../components/Events.css"; // Asigură-te că ai importat stilurile pentru evenimente
 
   function Events() {
     
@@ -15,7 +16,8 @@ import EventCard from "../components/EventCard"; // Asigură-te că ai importat 
           location: event.location,
           date: event.dateTime, // "dateTime" din backend -> "date" în frontend
           maxParticipants: event.max_attendants, // "max_attendants" -> "maxParticipants"
-          organiser: event.organiser // Adăugăm organizatorul
+          organiser: event.organiser,
+          description: event.description, // Adăugăm descrierea
         }));
         setEvents(formattedEvents);
       };
@@ -23,29 +25,16 @@ import EventCard from "../components/EventCard"; // Asigură-te că ai importat 
     }, []);
 
     return (
-        
+      
       <section className="events" style={{ paddingTop: "80px" }}>
+        
         <input
         type="text"
+        id = "search"
         placeholder="Caută după titlu sau locație..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        style={{
-            backgroundColor: "#f9f9f9",
-            color: "#333",  
-            marginBottom: "1.5rem",
-            padding: "0.75rem 1rem",
-            width: "100%",
-            maxWidth: "500px",
-            fontSize: "1rem",
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            outline: "none",
-            boxShadow: "0 2px 5px rgba(0,0,0,0.05)",
-            display: "block",
-            marginLeft: "auto",
-            marginRight: "auto"
-          }}
+        
         />
         {events.length > 0 ? (
 events

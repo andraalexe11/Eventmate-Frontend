@@ -33,6 +33,7 @@ function LoginForm() {
 
       localStorage.setItem('access_token', data.access_token);
       localStorage.setItem('isAuthenticated', true);
+
       navigate('/'); // sau unde vrei să duci utilizatorul după login
     } catch (error) {
       console.error('Login error', error);
@@ -42,7 +43,7 @@ function LoginForm() {
 
   return (
     <div className="auth-container">
-      <h2>Autentificare</h2>
+      <h2 >Autentificare</h2>
       <form onSubmit={handleSubmit} className="auth-form">
         <input
           type="text"

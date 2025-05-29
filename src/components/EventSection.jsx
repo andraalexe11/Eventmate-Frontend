@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getEvents } from "../api";
 import {joinEvent, leaveEvent, getEventsForUser} from "../api";
 import { Link } from "react-router-dom";
+import "./Events.css";
 import EventCard from "./EventCard"; // Asigură-te că ai importat corect EventCard
   function EventsSection() {
     
@@ -15,7 +16,8 @@ import EventCard from "./EventCard"; // Asigură-te că ai importat corect Event
           location: event.location,
           date: event.dateTime, // "dateTime" din backend -> "date" în frontend
           maxParticipants: event.max_attendants, // "max_attendants" -> "maxParticipants"
-          organiser: event.organiser // Adăugăm organizatorul
+          organiser: event.organiser,// Adăugăm organizatorul
+          description: event.description, // Adăugăm descrierea
         }));
         setEvents(formattedEvents);
 
@@ -25,13 +27,13 @@ import EventCard from "./EventCard"; // Asigură-te că ai importat corect Event
 
     return (
       <section className="events-section">
-        <h2>Evenimente Populare</h2>
+        <h2>Tendințe în socializare</h2>
         {events.length > 0 ? (
-        events.slice(0, 4).map((event, index) => <EventCard key={index} {...event} />)
+        events.slice(0, 3).map((event, index) => <EventCard key={index} {...event} />)
       ) : (
         <p>Nu există evenimente disponibile.</p>
       )}
-      <Link to="/events">Vezi toate evenimentele →</Link>
+      <Link to="/events">Vezi toate evenimentele </Link>
 
       </section>
     );

@@ -36,8 +36,13 @@ function Header() {
   };
 
   return (
+    <>
+    <div className="fixed-background"></div>
     <header className="header">
-      <h1>EventMate</h1>
+      
+      <h1>
+  <Link to="/" className="site-title">EventMate</Link>
+</h1>
       
       <button className="hamburger-btn" onClick={toggleMenu}>
         ☰
@@ -48,10 +53,13 @@ function Header() {
         
         <nav className="nav-links">
           <Link to="/" onClick={toggleMenu}>Acasă</Link>
+          {isAuthenticated ?(
           <Link to="/createevent" onClick={toggleMenu}>Creează Eveniment</Link>
-          <Link to="/events" onClick={toggleMenu}>Evenimente</Link>
+                            ) : null}
+          <Link to="/events" onClick={toggleMenu}>Evenimente Active</Link>
+          {isAuthenticated ?(
           <Link to="/profile" onClick={toggleMenu}>Profil</Link>
-          
+                            ) : null}
           {isAuthenticated ? (
             <button className="logout-btn" onClick={handleLogout}>
               Log Out
@@ -67,6 +75,7 @@ function Header() {
       
       {isMenuOpen && <div className="menu-overlay" onClick={toggleMenu}></div>}
     </header>
+    </>
   );
 }
 
