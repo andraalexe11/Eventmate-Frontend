@@ -3,7 +3,7 @@ import {joinEvent, leaveEvent, getEventsForUser} from "../api";
 import "./Events.css"; // Asigură-te că ai un fișier CSS pentru stilizare
 import { useNavigate } from 'react-router-dom';
 
-function EventCard({ title, location, date, maxParticipants, organiser, description }) {
+function EventCard({ title, location, date, maxParticipants, organiser, description, category }) {
   const navigate = useNavigate();
   const [isJoined, setIsJoined] = useState(false);
   const [participant, setParticipant] = useState('');
@@ -85,10 +85,13 @@ function EventCard({ title, location, date, maxParticipants, organiser, descript
       await joinEvent(title, participant); 
       setIsJoined(true);
       alert("Te-ai alăturat cu succes evenimentului!");
-    } catch (error) {
-
-      alert(error.response?.data || "A apărut o eroare, încearcă din nou.");
-    }
+    }catch (error) {
+  const errorMessage =
+    typeof error.response?.data === "string"
+      ? error.response.data
+      : error.message || "A apărut o eroare, încearcă din nou.";
+  alert(errorMessage);
+}
   };
   const handleLeave = async () => {
     try {
@@ -110,6 +113,7 @@ function EventCard({ title, location, date, maxParticipants, organiser, descript
   return (
       <div className="event-card">
         <h3>{title}</h3>
+        <p>📂 Categorie: {category}</p>
         <p>📍 Locație: {location}</p>
         <p>📅 Dată și oră: {formatDateTime(date)}</p>
         <p>📝 Descriere: {description}</p>

@@ -5,6 +5,7 @@ const token = localStorage.getItem("access_token");
 console.log("Token:", token); // Verificăm dacă token-ul este corect
 export const joinEvent = async (title, participant) => {
   const token = localStorage.getItem("access_token");
+  try{
   const response = await axios.post(
     `http://localhost:8081/participation/join`,
     null, // Body gol (sau poți trimite un obiect JSON, dar nu este cazul aici)
@@ -19,6 +20,15 @@ export const joinEvent = async (title, participant) => {
     }
   );
   return response.data; // Returnăm răspunsul din backend
+  }catch (error) { 
+    if (error.response && error.response.data) {
+      // Dacă backend-ul a trimis un mesaj de eroare (ex: "Event is full!")
+      throw new Error(error.response.data);
+    } else {
+      // Eroare generică
+      throw new Error("A apărut o eroare în timpul cererii de participare.");
+    }
+  }
 };
 
 export const getEventByName = async (name) => {

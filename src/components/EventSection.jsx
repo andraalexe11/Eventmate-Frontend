@@ -18,6 +18,7 @@ import EventCard from "./EventCard"; // Asigură-te că ai importat corect Event
           maxParticipants: event.max_attendants, // "max_attendants" -> "maxParticipants"
           organiser: event.organiser,// Adăugăm organizatorul
           description: event.description, // Adăugăm descrierea
+          category: event.category, // Adăugăm categoria
         }));
         setEvents(formattedEvents);
 

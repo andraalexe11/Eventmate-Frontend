@@ -61,4 +61,6 @@
     background-color: #f8f9fa;
     color: black;
   }
-  
+  input[type="password"]::-webkit-credentials-button {
+  filter: invert(1);
+}

@@ -57,7 +57,7 @@ const formatDateTime = (isoString) => {
         }
         setEvent(response);
         setParticipants(response.participants || []);
-        setIsOrganizer(currentUser === response.organiser);
+         
         setLoading(false);
       } catch (err) {
         setError(err.response?.message || err.message);
@@ -150,6 +150,7 @@ const handleCancelEvent = () => {
           ) : (
             <h1>{event.name}</h1>
           )}
+         
           <div className="event-meta">
             {isEditing ? (
               <div className="edit-date-time">
@@ -166,7 +167,26 @@ const handleCancelEvent = () => {
                 <strong>📅 Dată și Oră: </strong> {formatDateTime(event.dateTime)}
               </span>
             )}
-            
+           
+
+             
+            {isEditing ? (
+              <div className="edit-category">
+                <label htmlFor="edit-category">Categorie:</label>
+                <input
+                  id="edit-category"
+                  type="text"
+                  value={editedEvent.category}
+                  onChange={(e) => setEditedEvent({ ...editedEvent, category: e.target.value })}
+                />
+              </div>
+            ) : (
+              <span className="event-category-label">
+                <strong>📂 Categorie: </strong> {event.category}
+              </span>
+            )}
+          
+          
             {isEditing ? (
               <div className="edit-location">
               <label htmlFor="edit-location">Locație:</label>
@@ -201,7 +221,8 @@ const handleCancelEvent = () => {
             </span>
           </div>
         </div>
-      </div>
+        </div>
+        
 
       
       
@@ -271,14 +292,14 @@ const handleCancelEvent = () => {
       {isOrganizer && (
         <div className="organizer-actions">
           {isEditing ? (
-  <>
-    <button className="save-button" onClick={handleSaveEdit}>Salvează</button>
-    <button className="cancel-button" onClick={handleCancelEdit}>Anulează</button>
-  </>
-) : (
-  <button className="edit-event-button" onClick={handleEditClick}>Editează Eveniment</button>
-)}
-          <button className="cancel-event-button" onClick={handleCancelEvent}>Anulează Eveniment</button>
+            <>
+              <button className="save-button" onClick={handleSaveEdit}>Salvează</button>
+              <button className="cancel-button" onClick={handleCancelEdit}>Anulează</button>
+            </>
+          ) : (
+            <button className="edit-event-button" onClick={handleEditClick}>Editează Eveniment</button>
+          )}
+                    <button className="cancel-event-button" onClick={handleCancelEvent}>Anulează Eveniment</button>
         </div>
       )}
     </div>

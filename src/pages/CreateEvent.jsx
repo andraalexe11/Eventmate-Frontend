@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import "../components/Events.css"; // Asigură-te că ai un fișier CSS pentru stilizare
 function CreateEvent() {
-    const [eventDetails, setEventDetails] = useState({ title: "", description: "", location: "", date: "", maxParticipants: ""});
+    const [eventDetails, setEventDetails] = useState({ title: "", description: "", location: "", date: "", maxParticipants: "", category: "" });
     const [errorMessage, setErrorMessage] = useState(null); // Pentru mesajele de eroare
     const [organiserUsername, setOrganiserUsername] = useState(""); 
+    const [categories, setCategories] = useState([]);
+    const [newCategory, setNewCategory] = useState("");
+    const [isAddingNewCategory, setIsAddingNewCategory] = useState(false);
+
     const decodeToken = (token) => {
       try {
         const payload = JSON.parse(atob(token.split(".")[1])); // Decodifică partea utilă din token
@@ -14,6 +18,22 @@ function CreateEvent() {
         return null;
       }
     };
+
+    
+
+  useEffect(() => {
+      const fetchCategories = async () => {
+        try {
+          const response = await axios.get("http://localhost:8081/api/events");
+          const uniqueCategories = [...new Set(response.data.map(event => event.category))];
+          setCategories(uniqueCategories);
+        } catch (error) {
+          console.error("Eroare la obținerea categoriilor:", error);
+        }
+      };
+
+      fetchCategories();
+    }, []);
   
     useEffect(() => {
       const token = localStorage.getItem("access_token");
@@ -50,6 +70,7 @@ function CreateEvent() {
           dateTime: eventDetails.date,
           max_attendants: eventDetails.maxParticipants,
           organiser: organiserUsername,
+          category: eventDetails.category, // Adăugăm categoria dacă este necesară
         }
         , {
           headers: {
@@ -68,6 +89,7 @@ function CreateEvent() {
           date: "",
           maxParticipants: "",
           description: "",
+          category: ""
         });
         setErrorMessage(null);
 
@@ -86,6 +108,46 @@ function CreateEvent() {
 
         <form onSubmit={handleSubmit}>
           <input type="text" name="title" placeholder="Titlu eveniment" value={eventDetails.title} onChange={handleInputChange} required />
+          <div className="form-group">
+        <select
+          name="category"
+          placeholder="Selectează o categorie"
+          value={eventDetails.category}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (value === "__new__") {
+              setIsAddingNewCategory(true);
+              setEventDetails(prev => ({ ...prev, category: newCategory }));
+            } else {
+              setIsAddingNewCategory(false);
+              setEventDetails(prev => ({ ...prev, category: value }));
+              setNewCategory(""); // resetăm categoria nouă
+            }
+          }}
+          
+        >
+          <option value="">Selectează o categorie</option>
+          {categories.map((cat, index) => (
+            <option key={index} value={cat}>{cat}</option>
+          ))}
+          <option value="__new__">Adaugă categorie nouă</option>
+        </select>
+      </div>
+
+      {/* Dacă s-a ales "Adaugă categorie nouă", afișăm input separat */}
+      {isAddingNewCategory && (
+        <input
+          type="text"
+          placeholder="Introdu categorie nouă"
+          value={newCategory}
+          onChange={(e) => {
+            setNewCategory(e.target.value);
+            setEventDetails(prev => ({ ...prev, category: e.target.value }));
+          }}
+          required
+        />
+      )} 
+            
           <input type="text" name="description" placeholder="Descriere eveniment" value={eventDetails.description}  onChange={handleInputChange} />
           <input type="text" name="location" placeholder="Locație" value={eventDetails.location} onChange={handleInputChange} required />
           <input type="datetime-local" name="date" value={eventDetails.date} onChange={handleInputChange} required />

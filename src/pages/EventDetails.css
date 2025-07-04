@@ -234,7 +234,7 @@
 }
 
 /* Inputuri de editare */
-#edit-name, #edit-date-time,  #edit-location, #edit-description, #edit-max-participants {
+#edit-name, #edit-date-time,  #edit-location, #edit-description, #edit-max-participants, #edit-category {
   color: #1a202c;
   background-color: #ebe8e8;
   padding: 8px 12px;
@@ -248,7 +248,7 @@
   transition: border-color 0.2s ease;
 }
 
-#edit-name, #edit-date-time,  #edit-location, #edit-description, #edit-max-participants {
+#edit-name, #edit-date-time,  #edit-location, #edit-description, #edit-max-participants, #edit-category{
   border-color: #310550;
   outline: none;
 }
